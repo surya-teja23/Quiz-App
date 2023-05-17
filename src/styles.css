@@ -1,0 +1,13 @@
+* , *::before , *::after { 
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background: linear-gradient(to right , hsl(200, 100%, 50%), hsl(175, 100%, 50%));
+}
+
+@keyframes spin {
+  to { rotate: 360deg;}
+}
