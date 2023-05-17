@@ -1,6 +1,8 @@
 import React, { useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import useValues from "../Context/DataContext";
+import { GrCertificate , GrCircleQuestion } from 'react-icons/gr'
+import { AiOutlineClockCircle } from 'react-icons/ai'
 
 const HomePage = () => {
   const { setPlayerName } = useValues();
@@ -48,6 +50,18 @@ const HomePage = () => {
               placeholder="Enter"
             />
             <label>Last Name ( Optional )</label>
+          </div>
+          <div className="fw-bold">
+            This Quiz includes
+          </div>
+          <div>
+            <GrCertificate /> 50% Passing Percentage
+          </div>
+          <div>
+            <GrCircleQuestion /> Maximum 10 Questions
+          </div>
+          <div className="mb-4">
+            <AiOutlineClockCircle /> 1 Minute Per Question
           </div>
           <button
             className="mx-auto px-5 d-block btn btn-lg btn-danger"

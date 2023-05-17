@@ -8,11 +8,11 @@ const Question = () => {
   const { questions , time , setTime } = useValues()
   const { id } = useParams();
   const [choice, setChoice] = useState('')
-  let { question, options , optionSelected } = questions.find((question) => question.id == id);
+  let { question, options } = questions.find((question) => question.id === Number(id));
 
   function handleToggle(e) {
     if (e.target.checked) {
-      let questionSelected = questions.find((question) => question.id == id);
+      let questionSelected = questions.find((question) => question.id === Number(id));
       questionSelected.optionSelected = e.target.value;
       setChoice(e.target.value)
     }
@@ -20,15 +20,17 @@ const Question = () => {
   }
 
   useEffect ( () => {
-    setChoice('')
-  } , [])
+    setChoice("");
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  } , [id])
 
   useEffect(() => {
     if (time) {
       let timer = setInterval(() => setTime(time - 1), 1000);
 
       return () => clearInterval(timer);
-    } else navigate('/score')
+    } else navigate("/score");
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [time]);
 
   return (
@@ -37,8 +39,14 @@ const Question = () => {
         className="position-relative d-flex flex-column justify-content-center align-items-center"
         style={{ minHeight: "100vh", minWidth: "100vw" }}
       >
-        <div className="border border-dark rounded-3 p-2 fs-5 text-bg-dark position-absolute top-0 end-0 mt-4 me-4">
-          {Math.floor(time / 60)} : {time - Math.floor(time / 60) * 60}
+        <div className="border border-dark rounded-3 p-2 fs-5 text-bg-dark position-absolute top-0 end-0 mt-4 me-5">
+          {Math.floor(time / 60) < 10
+            ? `0${Math.floor(time / 60)}`
+            : Math.floor(time / 60)}
+          &nbsp; :&nbsp;&nbsp;
+          {time - Math.floor(time / 60) * 60 < 10
+            ? `0${time - Math.floor(time / 60) * 60}`
+            : time - Math.floor(time / 60) * 60}
         </div>
         <div
           style={{ width: "min(80vw,750px)" }}
@@ -66,10 +74,12 @@ const Question = () => {
                       value={option}
                       onChange={handleToggle}
                       autoComplete="on"
-                      checked=''
+                      checked=""
                     />
                     <label
-                      className={`${choice === option ? 'active' : ''} w-100 fs-5 fw-bolder rounded-4 ps-4 border border-2 border-dark text-start btn btn-outline-dark`}
+                      className={`${
+                        choice === option ? "active" : ""
+                      } w-100 fs-5 fw-bolder rounded-4 ps-4 border border-2 border-dark text-start btn btn-outline-dark`}
                       htmlFor={option}
                     >
                       {Parser(option)}
@@ -80,14 +90,21 @@ const Question = () => {
             </div>
           </div>
           <div className="d-flex justify-content-end mt-4">
-            {id == questions.length ? (
-              <Link to="/score" className="btn btn-danger btn-lg ms-auto me-5">
+            {Number(id) === questions.length ? (
+              <Link
+                to="/score"
+                className={`btn btn-danger btn-lg ms-auto me-5 ${
+                  choice ? "" : "disabled"
+                }`}
+              >
                 Finish Quiz
               </Link>
             ) : (
               <Link
                 to={`/question/${Number(id) + 1}`}
-                className="btn btn-danger btn-lg ms-auto me-5"
+                className={`btn btn-danger btn-lg ms-auto me-5 ${
+                  choice ? "" : "disabled"
+                }`}
               >
                 Next
               </Link>

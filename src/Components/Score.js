@@ -21,10 +21,11 @@ const Score = () => {
   useEffect(() => {
     let scored = 0;
     questions.map((question) => {
-      if (question.optionSelected == question.correct_answer) scored += 1;
+      if (question.optionSelected === question.correct_answer) scored += 1;
     });
 
     setScore(scored);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   return (
     <div

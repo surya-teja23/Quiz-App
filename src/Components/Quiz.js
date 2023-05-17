@@ -123,7 +123,7 @@ const Quiz = () => {
           <div>
             <div className="fs-5 text-decoration-underline">Note :</div>
             <div>
-              &#x2022; Timer of 5 minutes starts when you start your Quiz.
+              &#x2022; Timer starts when you start your Quiz.
             </div>
             <div>
               &#x2022; Quiz will be automatically submitted once timer runs out.
@@ -131,9 +131,9 @@ const Quiz = () => {
             <div>
               &#x2022; All questions must be answered ( No negative marks ).
             </div>
-            <div>
+            {/* <div>
               &#x2022; You cannot move back to previous question.
-            </div>
+            </div> */}
           </div>
         </div>
       )}

@@ -36,7 +36,7 @@ const QuestionsLoading = () => {
         });
         console.log(questions);
         setQuestions(questions);
-        setTime(300);
+        setTime(questions.length * 60);
       } catch (err) {
         setQuestionsFetchError(true);
       } finally {
